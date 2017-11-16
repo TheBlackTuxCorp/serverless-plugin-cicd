@@ -7,7 +7,7 @@ Serverless plugin for creating a CI/CD pipeline that watches a GitHub repo.
 # About The Black Tux
 The Black Tux is reinventing the formalwear rental industry so guys can show up at their best on the days that matter most. The company designs and manufactures modern rental suits and tuxedos that actually fit—made of 100% wool, ordered online or in one of our showrooms, and delivered for free. Using a combination of machine learning, tailor-trained fit specialists, and industry-leading customer service, The Black Tux guarantees a perfect fit every time.
 
-To support this elevated customer experience we rely on lots of technology to achieve this. From time to time we release things we build to the open source community when we feel they might be useful by others as well, and of course don't include anything proprietary.
+To support this elevated customer experience we rely on lots of technology. From time to time we release things we build to the open source community when we feel they might be useful by others as well, and of course don't include anything proprietary.
 
 # Getting Started
 
