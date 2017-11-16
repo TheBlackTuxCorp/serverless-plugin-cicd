@@ -60,10 +60,10 @@ image (node) | If the runtime is nodeJS | aws/codebuild/nodejs:6.3.1 | [Lookup o
 image (python) | If the runtime is python | aws/codebuild/python:3.5.2 | [Lookup other image identifiers](http://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html)
 image (other) | If the runtime is something else | aws/codebuild/ubuntu-base:14.04 | [Lookup other image identifiers](http://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html)
 branch | The git branch CodePipeline monitors | master | [More on how CodePipeline starts](http://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-about-starting.html)
-owner | The owner of the GitHub repository | <<blank>> | Required as no default
+owner | The owner of the GitHub repository | *blank* | Required as no default
 repository | The GitHub repository CodePipeline monitors | The name of your service | [More on how CodePipeline starts](http://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-about-starting.html)
-githubtoken | The GitHub OAuth token for private repos | <<blank>> | [How to get a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
-excludestages | Stages you don't want CICD for | <<blank>> | [Serverless stages](https://serverless.com/framework/docs/providers/aws/guide/workflow#using-stages)
+githubtoken | The GitHub OAuth token for private repos | *blank* | [How to get a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
+excludestages | Stages you don't want CICD for | *blank* | [Serverless stages](https://serverless.com/framework/docs/providers/aws/guide/workflow#using-stages)
 
 
 ## Deploying
