@@ -27,7 +27,7 @@ npm install serverless-plugin-cicd --save
 Then add the plugin to your `serverless.yml` file:
 ```yaml
 plugins:
-  - serverless-plugin-tbt-cicd
+  - serverless-plugin-cicd
 ```
 
 There are a number of parameters that you then can use:
