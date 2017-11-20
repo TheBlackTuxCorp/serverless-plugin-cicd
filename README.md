@@ -1,6 +1,7 @@
 # serverless-plugin-cicd
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![npm version](https://badge.fury.io/js/serverless-plugin-cicd.svg)](https://badge.fury.io/js/serverless-plugin-cicd)
 
 Serverless plugin for creating a CI/CD pipeline that watches a GitHub repo.
 

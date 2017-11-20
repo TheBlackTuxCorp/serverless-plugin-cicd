@@ -5,7 +5,6 @@ const _ = require('lodash')
 const baseImage = 'aws/codebuild/ubuntu-base:14.04'
 const nodeImage = 'aws/codebuild/nodejs:6.3.1'
 const pythonImage = 'aws/codebuild/python:3.5.2'
-let stage
 
 class CICDPlugin {
   constructor (serverless, options) {
@@ -13,7 +12,8 @@ class CICDPlugin {
     this.options = options
     this.provider = this.serverless.getProvider('aws')
 
-    /* Hooks tell Serverless when to do what */
+    this.stage = (this.options.stage && (this.options.stage.length > 0)) ? this.options.stage : service.provider.stage
+
     this.hooks = {
       'before:package:initialize': this.update.bind(this)
     }
@@ -24,12 +24,11 @@ class CICDPlugin {
    */
   update () {
     const service = this.serverless.service
-    stage = this.options.stage && this.options.stage.length > 0
-      ? this.options.stage
-      : service.provider.stage
+    const stage = this.stage
+
     if (service.custom.cicd) {
       if (service.custom.cicd.excludestages &&
-        service.custom.cicd.excludestages.includes('stage')) {
+        service.custom.cicd.excludestages.includes(stage)) {
         this.serverless.cli.log(`CICD is ignored for ${stage} stage`)
         return
       }
@@ -54,7 +53,9 @@ class CICDPlugin {
    */
   create () {
     const service = this.serverless.service
-    const serviceName = service.service
+    const stage = this.stage
+    const serviceName = stage ? `${service.service}-${stage}` : service.service
+
     let image = baseImage
     let gitOwner = ''
     let gitRepo = service.name
@@ -88,7 +89,7 @@ class CICDPlugin {
       CICDRole: {
         Type: 'AWS::IAM::Role',
         Properties: {
-          RoleName: `${serviceName}-${stage}`,
+          RoleName: `${serviceName}`,
           AssumeRolePolicyDocument: {
             Version: '2012-10-17',
             Statement: [ {
@@ -106,7 +107,7 @@ class CICDPlugin {
             } ]
           },
           Policies: [ {
-            PolicyName: `${serviceName}-${stage}`,
+            PolicyName: `${serviceName}`,
             PolicyDocument: {
               Version: '2012-10-17',
               Statement: [ {
@@ -149,7 +150,7 @@ class CICDPlugin {
       Build: {
         Type: 'AWS::CodeBuild::Project',
         Properties: {
-          Name: `${serviceName}-${stage}`,
+          Name: `${serviceName}`,
           ServiceRole: {
             'Fn::GetAtt': [
               'CICDRole',
@@ -158,7 +159,7 @@ class CICDPlugin {
           },
           Artifacts: {
             Type: 'CODEPIPELINE',
-            Name: `${serviceName}-${stage}-build`,
+            Name: `${serviceName}-build`,
             Packaging: 'NONE'
           },
           Environment: {
@@ -182,7 +183,7 @@ class CICDPlugin {
       Pipeline: {
         Type: 'AWS::CodePipeline::Pipeline',
         Properties: {
-          Name: `${serviceName}-${stage}`,
+          Name: `${serviceName}`,
           RoleArn: {
             'Fn::GetAtt': [
               'CICDRole',
@@ -219,7 +220,7 @@ class CICDPlugin {
                 Version: '1',
                 Provider: 'CodeBuild'
               },
-              OutputArtifacts: [ { Name: `${serviceName}Build` } ],
+              OutputArtifacts: [ { Name: `${serviceName}-build` } ],
               Configuration: {
                 ProjectName: {
                   'Ref': 'Build'

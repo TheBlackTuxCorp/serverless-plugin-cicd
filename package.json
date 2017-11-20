@@ -1,6 +1,6 @@
 {
   "name": "serverless-plugin-cicd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Serverless Plugin for adding simple CICD Pipelines to serverless functions",
   "main": "index.js",
   "scripts": {
