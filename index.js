@@ -136,7 +136,8 @@ class CICDPlugin {
                   'dynamodb:*',
                   'events:*',
                   'iam:*',
-                  'ssm:*'
+                  'ssm:*',
+                  'cognito-idp:*'
                 ],
                 Resource: '*'
               } ]
