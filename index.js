@@ -135,7 +135,8 @@ class CICDPlugin {
                   'kinesis:*',
                   'dynamodb:*',
                   'events:*',
-                  'iam:*'
+                  'iam:*',
+                  'ssm:*'
                 ],
                 Resource: '*'
               } ]
